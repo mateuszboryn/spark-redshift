@@ -632,7 +632,7 @@ at the end of the command can be used, but that should cover most possible use c
     <td>
     <p>
         The format in which to save temporary files in S3 when writing to Redshift.
-        Defaults to "AVRO"; the other allowed values are "CSV" and "CSV GZIP" for CSV
+        Defaults to "AVRO"; the other allowed values are "PARQUET", "CSV" and "CSV GZIP" for CSV
         and gzipped CSV, respectively.
     </p>
     <p>

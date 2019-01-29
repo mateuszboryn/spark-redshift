@@ -96,6 +96,7 @@ private[redshift] class RedshiftWriter(
     val fixedUrl = Utils.fixS3Url(manifestUrl)
     val format = params.tempFormat match {
       case "AVRO" => "AVRO 'auto'"
+      case "PARQUET" => "PARQUET"
       case csv if csv == "CSV" || csv == "CSV GZIP" => csv + s" NULL AS '${params.nullString}'"
     }
     s"COPY ${params.table.get} FROM '$fixedUrl' CREDENTIALS '$credsString' FORMAT AS " +
@@ -283,6 +284,8 @@ private[redshift] class RedshiftWriter(
     (tempFormat match {
       case "AVRO" =>
         writer.format("com.databricks.spark.avro")
+      case "PARQUET" =>
+        writer.format("parquet")
       case "CSV" =>
         writer.format("csv")
           .option("escape", "\"")
